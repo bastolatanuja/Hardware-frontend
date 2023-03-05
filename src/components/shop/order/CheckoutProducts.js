@@ -8,10 +8,44 @@ import { getBrainTreeToken, getPaymentProcess } from "./FetchApi";
 import { fetchData, fetchbrainTree, pay } from "./Action";
 
 import DropIn from "braintree-web-drop-in-react";
+import KhaltiCheckout from "khalti-checkout-web";
+
+
 
 const apiURL = process.env.REACT_APP_API_URL;
 
 export const CheckoutComponent = (props) => {
+
+// khalti integration
+let config = {
+  // replace this key with yours
+  "publicKey": "test_public_key_dc74e0fd57cb46cd93832aee0a390234",
+  "productIdentity": "1234567890",
+  "productName": "Drogon",
+  "productUrl": "http://gameofthrones.com/buy/Dragons",
+  "eventHandler": {
+      onSuccess (payload) {
+          // hit merchant api for initiating verfication
+          console.log(payload);
+      },
+      // onError handler is optional
+      onError (error) {
+          // handle errors
+          console.log(error);
+      },
+      onClose () {
+          console.log('widget is closing');
+      }
+  },
+  "paymentPreference": ["KHALTI", "EBANKING","MOBILE_BANKING", "CONNECT_IPS", "SCT"],
+};
+
+let checkout = new KhaltiCheckout(config);
+
+
+// khalti integration end
+
+
   const history = useHistory();
   const { data, dispatch } = useContext(LayoutContext);
 
@@ -110,10 +144,10 @@ export const CheckoutComponent = (props) => {
                       type="number"
                       id="phone"
                       className="border px-4 py-2"
-                      placeholder="+880"
+                      placeholder="+977"
                     />
                   </div>
-                  <DropIn
+                  {/* <DropIn
                     options={{
                       authorization: state.clientToken,
                       paypal: {
@@ -121,19 +155,11 @@ export const CheckoutComponent = (props) => {
                       },
                     }}
                     onInstance={(instance) => (state.instance = instance)}
-                  />
+                  /> */}
+                  {/* <button id="payment-button" onClick={() => checkout.show({amount: 1000})}>Pay with Khalti</button> */}
                   <div
-                    onClick={(e) =>
-                      pay(
-                        data,
-                        dispatch,
-                        state,
-                        setState,
-                        getPaymentProcess,
-                        totalCost,
-                        history
-                      )
-                    }
+                    id="payment-button"
+                    onClick={() => checkout.show({amount: (data.cartTotalCost * 100)})}
                     className="w-full px-4 py-2 text-center text-white font-semibold cursor-pointer"
                     style={{ background: "#303031" }}
                   >
@@ -190,13 +216,13 @@ const CheckoutProducts = ({ products }) => {
                     {product.pName}
                   </div>
                   <div className="md:ml-6 font-semibold text-gray-600 text-sm">
-                    Price : ${product.pPrice}.00{" "}
+                    Price : Rs. {product.pPrice}.00{" "}
                   </div>
                   <div className="md:ml-6 font-semibold text-gray-600 text-sm">
                     Quantitiy : {quantity(product._id)}
                   </div>
                   <div className="font-semibold text-gray-600 text-sm">
-                    Subtotal : ${subTotal(product._id, product.pPrice)}.00
+                    Subtotal : Rs. {subTotal(product._id, product.pPrice)}.00
                   </div>
                 </div>
               </div>
