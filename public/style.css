@@ -22,6 +22,7 @@ html {
 
 body {
   margin: 0;
+  background-color: honeydew;
 }
 
 /**
@@ -1803,7 +1804,7 @@ video {
 
 .bg-honey-dew{
   --bg-opacity: 1;
-  background-color: honeydew;
+  background-color: lavenderblush;
   /* background-color: rgba(255, 255, 255, var(--bg-opacity)); */
 }
 
