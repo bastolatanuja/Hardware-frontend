@@ -1795,7 +1795,17 @@ video {
   background-color: #000;
   background-color: rgba(0, 0, 0, var(--bg-opacity));
 }
+.bg-beige{
+  --bg-opacity: 1;
+  background-color: beige;
+  /* background-color: rgba(255, 255, 255, var(--bg-opacity)); */
+}
 
+.bg-honey-dew{
+  --bg-opacity: 1;
+  background-color: honeydew;
+  /* background-color: rgba(255, 255, 255, var(--bg-opacity)); */
+}
 
 .bg-white {
   --bg-opacity: 1;

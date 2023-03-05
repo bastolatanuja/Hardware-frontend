@@ -30,16 +30,16 @@ const Navber = (props) => {
   return (
     <Fragment>
       {/* Navber Section */}
-      <nav className="fixed top-0 w-full z-20 shadow-lg lg:shadow-none bg-white">
+      <nav className="fixed top-0 w-full z-20 shadow-lg lg:shadow-none bg-beige">
         <div className="m-4 md:mx-12 md:my-6 grid grid-cols-4 lg:grid-cols-3">
           <div className="hidden lg:block col-span-1 flex text-gray-600 mt-1">
             <span
               className="hover:bg-gray-200 px-4 py-3 rounded-lg font-light tracking-widest hover:text-gray-800 cursor-pointer"
               onClick={(e) => history.push("/")}
             >
-              Shop
+              Home
             </span>
-            <span
+            {/* <span
               className="hover:bg-gray-200 px-4 py-3 rounded-lg font-light tracking-widest hover:text-gray-800 cursor-pointer"
               onClick={(e) => history.push("/blog")}
             >
@@ -50,7 +50,7 @@ const Navber = (props) => {
               onClick={(e) => history.push("/contact-us")}
             >
               Contact us
-            </span>
+            </span> */}
           </div>
           <div className="col-span-2 lg:hidden flex justify-items-stretch	 items-center">
             <svg
